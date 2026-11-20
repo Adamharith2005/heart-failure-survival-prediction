@@ -1,0 +1,32 @@
+# Jupyter
+.ipynb_checkpoints/
+*/.ipynb_checkpoints/
+
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+
+# Virtual environments
+.venv/
+venv/
+env/
+ml_env/
+
+# Environment variables / secrets
+.env
+kaggle.json
+
+# Saved models and large outputs
+*.pkl
+*.joblib
+*.h5
+
+# IDE / editor
+.vscode/
+.idea/
+
+# OS files
+.DS_Store
+Thumbs.db
+desktop.ini
