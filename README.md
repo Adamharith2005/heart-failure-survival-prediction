@@ -2,6 +2,7 @@
 
 Predicting death of heart failure patients from clinical records using **Random Forest** and **Gradient Boosting**, benchmarked against [Chicco & Jurman (2020)](https://doi.org/10.1186/s12911-020-1023-5).
 
+![Accuracy comparison](images/accuracy_comparison.png)
 
 ## Overview
 
