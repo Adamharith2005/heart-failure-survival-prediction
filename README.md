@@ -26,20 +26,25 @@ Mean over 100 splits:
 | Paper: Random Forest | 0.384 | 0.547 | 0.740 | 0.491 | 0.800 |
 | Paper: Gradient Boosting | 0.367 | 0.527 | 0.738 | 0.477 | 0.754 |
 | RF: baseline | 0.361 | 0.525 | 0.737 | 0.467 | 0.783 |
-| GB: baseline | 0.347 | 0.527 | 0.728 | 0.489 | 0.742 |
-| RF: SMOTE + tuned | 0.360 | 0.557 | 0.722 | 0.557 | 0.768 |
-| **GB: SMOTE + tuned** | **0.363** | **0.562** | 0.723 | **0.568** | 0.752 |
+| GB: baseline | 0.348 | 0.528 | 0.728 | 0.489 | 0.742 |
+| RF: SMOTE | 0.379 | 0.571 | 0.730 | 0.573 | 0.768 |
+| GB: SMOTE | 0.370 | 0.570 | 0.723 | 0.584 | 0.746 |
+| RF: SMOTE + tuned | 0.388 | 0.585 | 0.728 | 0.608 | 0.769 |
+| **GB: SMOTE + tuned** | **0.397** | **0.593** | 0.730 | **0.627** | 0.758 |
 
 ## Key Findings
 
 - **The paper's results were reproduced.** Both baselines fall within one standard deviation of the published results on every metric.
-- **SMOTE + tuning raises recall from under 0.50 to about 0.56** (p < 0.001). This means more of the patients who died are correctly flagged, at a small cost in accuracy.
-- **No method significantly improves MCC.** With 299 patients, the features limit performance more than the algorithm does.
+- **The best model, Gradient Boosting with SMOTE + tuning, beats the paper on MCC, F1 and recall** (0.397, 0.593 and 0.627), but not on accuracy or ROC AUC.
+- **The gains come from handling class imbalance.** Over its own baseline on the same 100 splits, the best model improves:
+  - recall by +0.14 (p < 0.001)
+  - MCC by +0.049 (p < 0.001, better in 66 of 100 splits)
 - **Serum creatinine and ejection fraction** are the strongest predictors, which agrees with the paper.
-- **Including `time` inflates accuracy from about 74% to 84%.** This is target leakage, because follow-up ends when a patient dies. It also explains the earlier version's single-split result of "83% accuracy".
+- **Including `time` inflates accuracy from about 74% to 84%.** This is target leakage, because follow-up ends when a patient dies. It also explains the original version's single-split result of "83% accuracy" (see [`archive/`](archive/)).
 
 ## Limitations
 
+- **Cross-study comparison.** The paper used R and its own random splits, so small differences against the paper should not be over-interpreted. The paired improvement over this study's own baseline is the more reliable result.
 - **Small, single-hospital dataset.** It has 299 patients from one hospital, recorded in 2015, and there is no external validation.
 - **Fixed decision threshold of 0.5.** Adjusting the threshold could trade false alarms for missed deaths further.
 
